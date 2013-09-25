@@ -8,6 +8,8 @@
 
 #import "DetailViewController.h"
 
+
+
 @interface DetailViewController ()
 - (void)configureView;
 @end
@@ -29,9 +31,23 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
+    
+    self.title = [[self.detailItem valueForKey:@"title"] description];
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+        [self.detailDescriptionLabel setText:[[self.detailItem valueForKey:@"title"] description]];
+        [self.bodyTextView.layer setCornerRadius:5];
+        [self.bodyTextView.layer setBorderWidth:0.5];
+        [self.bodyTextView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+        self.bodyTextView.text = [[self.detailItem valueForKey:@"body"] description];
+        [self.bodyTextView sizeToFit];
+        self.linkLabel.text = [[self.detailItem valueForKey:@"link"] description];
+        self.attachedImageView.image = [UIImage imageWithData:[self.detailItem valueForKey:@"attachedImage"]];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        NSString *date = [formatter stringFromDate:[self.detailItem valueForKey:@"creationDate"]];
+        self.dateLabel.text = [NSString stringWithFormat:@"Created on: %@",date];
     }
 }
 
@@ -40,12 +56,106 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    self.tracker = [[GAI sharedInstance] defaultTracker];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[GAI sharedInstance] dispatch];
+}
+
+- (IBAction)postToFacebook:(id)sender {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *facebookComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        facebookComposer.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                    //  This means the user cancelled without sending the Tweet
+                case SLComposeViewControllerResultCancelled:
+                    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"cancelled facebook post"] forKeys:@[@"facebooks_sent"]]];
+                    break;
+                    //  This means the user hit 'Send'
+                case SLComposeViewControllerResultDone:
+                    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"sent facebook post"] forKeys:@[@"facebooks_sent"]]];
+                    break;
+            }
+        };
+        [facebookComposer setInitialText:[NSString stringWithFormat:@"%@",[self.detailItem valueForKey:@"body"]]];
+        [facebookComposer addURL:[NSURL URLWithString:self.linkLabel.text]];
+        [facebookComposer addImage:self.attachedImageView.image];
+        //[facebookComposer addURL:[self.detailItem valueForKey:@"link"]];
+        [self presentViewController:facebookComposer animated:YES completion:nil];
+    }
+    else{
+        NSLog(@"Service Unavailable");
+        [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"facebook unavailable"] forKeys:@[@"setup"]]];
+        [[[UIAlertView alloc] initWithTitle:@"Facebook Unavailable" message:@"Please sign into Facebook in iOS settings to post to your account." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil]show];
+    }
+}
+
+- (IBAction)postToTwitter:(id)sender {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *twitterComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        twitterComposer.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                    //  This means the user cancelled without sending the Tweet
+                case SLComposeViewControllerResultCancelled:
+                    NSLog(@"Cancelled Post!");
+                    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"canceled tweet"] forKeys:@[@"tweets_sent"]]];
+                    break;
+                    //  This means the user hit 'Send'
+                case SLComposeViewControllerResultDone:
+                    NSLog(@"Posted Successfully!");
+                    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"sent tweet"] forKeys:@[@"tweets_sent"]]];
+                    break;
+            }
+        };
+        [twitterComposer setInitialText:[self.detailItem valueForKey:@"body"]];
+        [twitterComposer addImage:self.attachedImageView.image];
+        [twitterComposer addURL:[self.detailItem valueForKey:@"link"]];
+        [self presentViewController:twitterComposer animated:YES completion:nil];
+    }
+    else{
+        NSLog(@"Service Unavailable");
+        [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"twitter unavailable"] forKeys:@[@"setup"]]];
+        [[[UIAlertView alloc] initWithTitle:@"Twitter Unavailable" message:@"Please sign into Twitter in iOS settings to post to your account." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil]show];
+    }
+}
+
+- (IBAction)sendInEmail:(id)sender {
+    MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+    [mail setSubject:@"One of my stashed posts from SocialStash"];
+    [mail setMessageBody:[NSString stringWithFormat:@"%@\n\n\nSent from SocialStash v2.0",self.bodyTextView.text] isHTML:NO];
+    [mail setMailComposeDelegate:self];
+    [self presentViewController:mail animated:YES completion:^{
+        
+    }];
+}
+
+- (IBAction)sendInTextMessage:(id)sender {
+    MFMessageComposeViewController *message = [[MFMessageComposeViewController alloc] init];
+    [message setBody:[NSString stringWithFormat:@"%@\n\n\nSent from SocialStash v2.0",self.bodyTextView.text]];
+    [message setMessageComposeDelegate:self];
+    [self presentViewController:message animated:YES completion:^{
+        
+    }];
+}
+
+#pragma mark MFMailComposeDelegate methods
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"Sent an email!");
+        [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"sent email"] forKeys:@[@"emails_sent"]]];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark MFMessageComposeDelegate methods
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    if (result == MessageComposeResultSent) {
+        NSLog(@"Sent a text!");
+        [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"sent text"] forKeys:@[@"texts_sent"]]];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

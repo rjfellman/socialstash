@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C45F37B17E017140040A451 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45F37917E017140040A451 /* Main_iPad.storyboard */; };
+		8C45F38517E023AE0040A451 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38417E023AE0040A451 /* SystemConfiguration.framework */; };
+		8C45F38717E023C30040A451 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38617E023C30040A451 /* libz.dylib */; };
+		8C45F38917E22F8F0040A451 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38817E22F8F0040A451 /* CFNetwork.framework */; };
 		8C7AD4EB17D7DE2D00362654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7AD4EA17D7DE2D00362654 /* Foundation.framework */; };
 		8C7AD4ED17D7DE2D00362654 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7AD4EC17D7DE2D00362654 /* CoreGraphics.framework */; };
 		8C7AD4EF17D7DE2D00362654 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7AD4EE17D7DE2D00362654 /* UIKit.framework */; };
@@ -25,6 +29,19 @@
 		8C7AD51517D7DE2D00362654 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7AD4F017D7DE2D00362654 /* CoreData.framework */; };
 		8C7AD51D17D7DE2D00362654 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C7AD51B17D7DE2D00362654 /* InfoPlist.strings */; };
 		8C7AD51F17D7DE2D00362654 /* SocialStashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AD51E17D7DE2D00362654 /* SocialStashTests.m */; };
+		8C7AD52A17D7DF2800362654 /* StatusCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AD52917D7DF2800362654 /* StatusCreationViewController.m */; };
+		8C7AD52C17D7E02700362654 /* StatusCreationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C7AD52B17D7E02700362654 /* StatusCreationViewController.xib */; };
+		8C7AD52E17D812C400362654 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C7AD52D17D812C400362654 /* placeholder.png */; };
+		8C7AD53417D8307400362654 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AD53317D8307400362654 /* Post.m */; };
+		8C8340B917E9606F007F0B5B /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8340B817E9606F007F0B5B /* libGoogleAnalyticsServices.a */; };
+		8CB9074917E92A1D00AD241E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9074817E92A1C00AD241E /* Icon.png */; };
+		8CB9074C17E92F1B00AD241E /* icon_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9074A17E92F1B00AD241E /* icon_512.png */; };
+		8CB9074D17E92F1B00AD241E /* icon_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9074B17E92F1B00AD241E /* icon_1024.png */; };
+		8CB9075017E92F7A00AD241E /* icon_60.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9074E17E92F7A00AD241E /* icon_60.png */; };
+		8CB9075117E92F7A00AD241E /* AppIcon60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9074F17E92F7A00AD241E /* AppIcon60x60.png */; };
+		8CB9075317E92FC800AD241E /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB9075217E92FC800AD241E /* AppIcon29x29.png */; };
+		8CD64EF217D8CFFB0000D898 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD64EF117D8CFFB0000D898 /* Social.framework */; };
+		8CD64EF417D97D110000D898 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD64EF317D97D110000D898 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +55,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C45F37A17E017140040A451 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		8C45F37C17E023970040A451 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		8C45F37D17E023970040A451 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		8C45F37E17E023970040A451 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		8C45F37F17E023970040A451 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		8C45F38017E023970040A451 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		8C45F38117E023970040A451 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		8C45F38217E023970040A451 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
+		8C45F38417E023AE0040A451 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8C45F38617E023C30040A451 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		8C45F38817E22F8F0040A451 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8C7AD4E717D7DE2D00362654 /* SocialStash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialStash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C7AD4EA17D7DE2D00362654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8C7AD4EC17D7DE2D00362654 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,6 +89,21 @@
 		8C7AD51A17D7DE2D00362654 /* SocialStashTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SocialStashTests-Info.plist"; sourceTree = "<group>"; };
 		8C7AD51C17D7DE2D00362654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C7AD51E17D7DE2D00362654 /* SocialStashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SocialStashTests.m; sourceTree = "<group>"; };
+		8C7AD52817D7DF2800362654 /* StatusCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCreationViewController.h; sourceTree = "<group>"; };
+		8C7AD52917D7DF2800362654 /* StatusCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCreationViewController.m; sourceTree = "<group>"; };
+		8C7AD52B17D7E02700362654 /* StatusCreationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCreationViewController.xib; sourceTree = "<group>"; };
+		8C7AD52D17D812C400362654 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		8C7AD53217D8307400362654 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = ../Post.h; sourceTree = "<group>"; };
+		8C7AD53317D8307400362654 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = ../Post.m; sourceTree = "<group>"; };
+		8C8340B817E9606F007F0B5B /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		8CB9074817E92A1C00AD241E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8CB9074A17E92F1B00AD241E /* icon_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_512.png; sourceTree = "<group>"; };
+		8CB9074B17E92F1B00AD241E /* icon_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_1024.png; sourceTree = "<group>"; };
+		8CB9074E17E92F7A00AD241E /* icon_60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_60.png; sourceTree = "<group>"; };
+		8CB9074F17E92F7A00AD241E /* AppIcon60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon60x60.png; sourceTree = "<group>"; };
+		8CB9075217E92FC800AD241E /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
+		8CD64EF117D8CFFB0000D898 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8CD64EF317D97D110000D898 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +111,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C45F38917E22F8F0040A451 /* CFNetwork.framework in Frameworks */,
+				8C45F38717E023C30040A451 /* libz.dylib in Frameworks */,
+				8C45F38517E023AE0040A451 /* SystemConfiguration.framework in Frameworks */,
+				8CD64EF417D97D110000D898 /* MessageUI.framework in Frameworks */,
+				8CD64EF217D8CFFB0000D898 /* Social.framework in Frameworks */,
 				8C7AD4ED17D7DE2D00362654 /* CoreGraphics.framework in Frameworks */,
 				8C7AD4F117D7DE2D00362654 /* CoreData.framework in Frameworks */,
 				8C7AD4EF17D7DE2D00362654 /* UIKit.framework in Frameworks */,
+				8C8340B917E9606F007F0B5B /* libGoogleAnalyticsServices.a in Frameworks */,
 				8C7AD4EB17D7DE2D00362654 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,9 +138,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C45F37817E015710040A451 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				8C45F37917E017140040A451 /* Main_iPad.storyboard */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		8C7AD4DE17D7DE2D00362654 = {
 			isa = PBXGroup;
 			children = (
+				8C8340B817E9606F007F0B5B /* libGoogleAnalyticsServices.a */,
+				8CB9075217E92FC800AD241E /* AppIcon29x29.png */,
+				8CB9074E17E92F7A00AD241E /* icon_60.png */,
+				8CB9074F17E92F7A00AD241E /* AppIcon60x60.png */,
+				8CB9074A17E92F1B00AD241E /* icon_512.png */,
+				8CB9074B17E92F1B00AD241E /* icon_1024.png */,
+				8CB9074817E92A1C00AD241E /* Icon.png */,
+				8C45F37C17E023970040A451 /* GAI.h */,
+				8C45F37D17E023970040A451 /* GAIDictionaryBuilder.h */,
+				8C45F37E17E023970040A451 /* GAIFields.h */,
+				8C45F37F17E023970040A451 /* GAILogger.h */,
+				8C45F38017E023970040A451 /* GAITrackedViewController.h */,
+				8C45F38117E023970040A451 /* GAITracker.h */,
+				8C45F38217E023970040A451 /* libGoogleAnalytics_debug.a */,
 				8C7AD4F217D7DE2D00362654 /* SocialStash */,
 				8C7AD51817D7DE2D00362654 /* SocialStashTests */,
 				8C7AD4E917D7DE2D00362654 /* Frameworks */,
@@ -111,6 +182,11 @@
 		8C7AD4E917D7DE2D00362654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C45F38817E22F8F0040A451 /* CFNetwork.framework */,
+				8C45F38617E023C30040A451 /* libz.dylib */,
+				8C45F38417E023AE0040A451 /* SystemConfiguration.framework */,
+				8CD64EF317D97D110000D898 /* MessageUI.framework */,
+				8CD64EF117D8CFFB0000D898 /* Social.framework */,
 				8C7AD4EA17D7DE2D00362654 /* Foundation.framework */,
 				8C7AD4EC17D7DE2D00362654 /* CoreGraphics.framework */,
 				8C7AD4EE17D7DE2D00362654 /* UIKit.framework */,
@@ -123,6 +199,10 @@
 		8C7AD4F217D7DE2D00362654 /* SocialStash */ = {
 			isa = PBXGroup;
 			children = (
+				8C45F37817E015710040A451 /* iPad */,
+				8C7AD53217D8307400362654 /* Post.h */,
+				8C7AD53317D8307400362654 /* Post.m */,
+				8C7AD52D17D812C400362654 /* placeholder.png */,
 				8C7AD4FB17D7DE2D00362654 /* AppDelegate.h */,
 				8C7AD4FC17D7DE2D00362654 /* AppDelegate.m */,
 				8C7AD4FE17D7DE2D00362654 /* Main.storyboard */,
@@ -133,6 +213,9 @@
 				8C7AD50A17D7DE2D00362654 /* Images.xcassets */,
 				8C7AD50117D7DE2D00362654 /* SocialStash.xcdatamodeld */,
 				8C7AD4F317D7DE2D00362654 /* Supporting Files */,
+				8C7AD52817D7DF2800362654 /* StatusCreationViewController.h */,
+				8C7AD52917D7DF2800362654 /* StatusCreationViewController.m */,
+				8C7AD52B17D7E02700362654 /* StatusCreationViewController.xib */,
 			);
 			path = SocialStash;
 			sourceTree = "<group>";
@@ -213,6 +296,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Russ Fellman";
 				TargetAttributes = {
+					8C7AD4E617D7DE2D00362654 = {
+						DevelopmentTeam = 6DFK3J592V;
+					};
 					8C7AD50F17D7DE2D00362654 = {
 						TestTargetID = 8C7AD4E617D7DE2D00362654;
 					};
@@ -243,8 +329,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C7AD50B17D7DE2D00362654 /* Images.xcassets in Resources */,
+				8C7AD52C17D7E02700362654 /* StatusCreationViewController.xib in Resources */,
 				8C7AD4F717D7DE2D00362654 /* InfoPlist.strings in Resources */,
+				8CB9074917E92A1D00AD241E /* Icon.png in Resources */,
+				8CB9074D17E92F1B00AD241E /* icon_1024.png in Resources */,
+				8C45F37B17E017140040A451 /* Main_iPad.storyboard in Resources */,
+				8C7AD52E17D812C400362654 /* placeholder.png in Resources */,
 				8C7AD50017D7DE2D00362654 /* Main.storyboard in Resources */,
+				8CB9075117E92F7A00AD241E /* AppIcon60x60.png in Resources */,
+				8CB9075017E92F7A00AD241E /* icon_60.png in Resources */,
+				8CB9075317E92FC800AD241E /* AppIcon29x29.png in Resources */,
+				8CB9074C17E92F1B00AD241E /* icon_512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +363,8 @@
 				8C7AD4FD17D7DE2D00362654 /* AppDelegate.m in Sources */,
 				8C7AD4F917D7DE2D00362654 /* main.m in Sources */,
 				8C7AD50317D7DE2D00362654 /* SocialStash.xcdatamodeld in Sources */,
+				8C7AD52A17D7DF2800362654 /* StatusCreationViewController.m in Sources */,
+				8C7AD53417D8307400362654 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +387,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8C45F37917E017140040A451 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C45F37A17E017140040A451 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
 		8C7AD4F517D7DE2D00362654 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -390,10 +495,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Russell Fellman (3CVVEGZUAQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Russell Fellman (3CVVEGZUAQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SocialStash/SocialStash-Prefix.pch";
 				INFOPLIST_FILE = "SocialStash/SocialStash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					/Users/rustyfellman/Development/vulpine/SocialStash,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -403,10 +518,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Russell Fellman (6DFK3J592V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Russell Fellman (6DFK3J592V)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SocialStash/SocialStash-Prefix.pch";
 				INFOPLIST_FILE = "SocialStash/SocialStash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					/Users/rustyfellman/Development/vulpine/SocialStash,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -470,6 +595,7 @@
 				8C7AD52417D7DE2D00362654 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C7AD52517D7DE2D00362654 /* Build configuration list for PBXNativeTarget "SocialStashTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +604,7 @@
 				8C7AD52717D7DE2D00362654 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

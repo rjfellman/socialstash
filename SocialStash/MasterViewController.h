@@ -10,9 +10,17 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+#import "StatusCreationViewController.h"
+
+#import "Post.h"
+
+#import "GAI.h"
+
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, StatusCreationDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (atomic, assign) id<GAITracker> tracker;
 
 @end

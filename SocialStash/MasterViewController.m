@@ -7,8 +7,10 @@
 //
 
 #import "MasterViewController.h"
-
+#import "GAI.h"
 #import "DetailViewController.h"
+
+#import "StatusCreationViewController.h"
 
 @interface MasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -27,14 +29,29 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentCreationDialog)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    self.tracker = [[GAI sharedInstance] defaultTracker];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[GAI sharedInstance] dispatch];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)presentCreationDialog{
+    StatusCreationViewController *statusCreationViewController = [[StatusCreationViewController alloc] initWithNibName:@"StatusCreationViewController" bundle:nil];
+    statusCreationViewController.delegate = self;
+    [self presentViewController:statusCreationViewController animated:YES completion:^{
+        
+    }];
 }
 
 - (void)insertNewObject:(id)sender
@@ -61,6 +78,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    [self.tracker send:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithUnsignedInt:[[self.fetchedResultsController sections] count]]] forKeys:@[@"number of posts"]]];
     return [[self.fetchedResultsController sections] count];
 }
 
@@ -124,14 +142,14 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -184,6 +202,7 @@
             break;
             
         case NSFetchedResultsChangeDelete:
+            [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"deleted a post"] forKeys:@[@"post_management"]]];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
@@ -216,7 +235,43 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    cell.textLabel.text = [[object valueForKey:@"title"] description];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+}
+
+#pragma mark StatusCreationDelegate methods
+
+-(void)statusDidCancel{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"canceled a post"] forKeys:@[@"post_management"]]];
+    }];
+}
+
+-(void)statusDidFinishCreation:(StatusCreationViewController *)statusController{
+    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"created a post"] forKeys:@[@"post_management"]]];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    Post *newPost = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+
+    [newPost setTitle:statusController.titleTextField.text];
+    [newPost setBody:statusController.bodyTextView.text];
+    [newPost setLink:statusController.linkTextField.text];
+    [newPost setAttachedImage: UIImagePNGRepresentation(statusController.attachedImageButton.imageView.image)];
+    [newPost setCreationDate:[NSDate date]];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+-(void)statusDidFinishEditing:(StatusCreationViewController *)statusController{
+    
 }
 
 @end
