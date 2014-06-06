@@ -27,12 +27,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *about = [[UIBarButtonItem alloc] initWithTitle:@"info" style:UIBarButtonItemStylePlain target:self action:@selector(aboutSocialStash)];
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = about;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentCreationDialog)];
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.tracker = [[GAI sharedInstance] defaultTracker];
+    
+    self.canDisplayBannerAds = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -44,6 +48,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)aboutSocialStash{
+    [self.tracker send:@{@"viewed about":@"peripheral_actions"}];
+    [[[UIAlertView alloc] initWithTitle:@"SocialStash" message:@"SocialStash is your place to keep ideas you want to share until you are ready to share them - Across as many social networks and channels as you would like. Happy Stashing!\n\n\n\nDeveloper: Russ Fellman\nruss216@gmail.com" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil, nil] show];
 }
 
 - (void)presentCreationDialog{
@@ -74,6 +83,17 @@
     }
 }
 
+- (void)showTutorial{
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"is_after_first_launch"]) {
+        [[[UIAlertView alloc] initWithTitle:@"SocialStash" message:@"This is your stash. Posts that you create will appear here and you can view and share them via the social channels of your choice." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"is_after_first_launch"];
+    }
+}
+
+#pragma mark iAds
+
+
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -85,6 +105,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    if ([sectionInfo numberOfObjects] == 0) {
+        [self showTutorial];
+    }
     return [sectionInfo numberOfObjects];
 }
 

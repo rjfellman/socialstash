@@ -57,6 +57,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     self.tracker = [[GAI sharedInstance] defaultTracker];
+    self.canDisplayBannerAds = YES;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -64,7 +65,17 @@
     [[GAI sharedInstance] dispatch];
 }
 
-- (IBAction)postToFacebook:(id)sender {
+- (IBAction)share:(id)sender{
+    UIActionSheet *shareActionSheet = [[UIActionSheet alloc]
+                                       initWithTitle:nil
+                                       delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       destructiveButtonTitle:nil
+                                       otherButtonTitles:@"Facebook", @"Twitter", @"Instagram", @"Email", @"Text", nil];
+    [shareActionSheet showInView:self.view];
+}
+
+- (void)postToFacebook{
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *facebookComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         facebookComposer.completionHandler = ^(SLComposeViewControllerResult result) {
@@ -92,7 +103,7 @@
     }
 }
 
-- (IBAction)postToTwitter:(id)sender {
+- (void)postToTwitter{
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *twitterComposer = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         twitterComposer.completionHandler = ^(SLComposeViewControllerResult result) {
@@ -121,7 +132,44 @@
     }
 }
 
-- (IBAction)sendInEmail:(id)sender {
+- (void)postToInstagram{
+    NSLog(@"Post to instagram");
+    
+    CGRect rect = CGRectMake(0 ,0 , 0, 0);
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIGraphicsEndImageContext();
+    [self saveImage:self.attachedImageView.image withFileName:@"test" ofType:@"igo" inDirectory:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]];
+    NSString  *jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/test.igo"];
+    
+    NSURL *igImageHookFile = [[NSURL alloc] initFileURLWithPath:[NSString stringWithFormat:@"file://%@", jpgPath]];
+    self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
+    self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
+    self.dic.UTI = @"com.instagram.photo";
+    self.dic.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ #socialstash", self.bodyTextView.text]};
+    [self.dic presentOpenInMenuFromRect: rect    inView: self.view animated: YES ];
+    
+    [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"shared with instagram"] forKeys:@[@"instagrams"]]];
+}
+
+- (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
+    UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: fileURL];
+    interactionController.delegate = interactionDelegate;
+    return interactionController;
+}
+
+-(void) saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath {
+    if ([[extension lowercaseString] isEqualToString:@"igo"]) {
+        [UIImagePNGRepresentation(image) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"igo"]] options:NSAtomicWrite error:nil];
+    } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
+        [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]] options:NSAtomicWrite error:nil];
+    } else {
+        NSLog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
+    }
+    
+}
+
+- (void)sendInEmail{
     MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
     [mail setSubject:@"One of my stashed posts from SocialStash"];
     [mail setMessageBody:[NSString stringWithFormat:@"%@\n\n\nSent from SocialStash v2.0",self.bodyTextView.text] isHTML:NO];
@@ -131,7 +179,7 @@
     }];
 }
 
-- (IBAction)sendInTextMessage:(id)sender {
+- (void)sendInTextMessage{
     MFMessageComposeViewController *message = [[MFMessageComposeViewController alloc] init];
     [message setBody:[NSString stringWithFormat:@"%@\n\n\nSent from SocialStash v2.0",self.bodyTextView.text]];
     [message setMessageComposeDelegate:self];
@@ -156,6 +204,30 @@
         [self.tracker send:[NSDictionary dictionaryWithObjects:@[@"sent text"] forKeys:@[@"texts_sent"]]];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark UIActionSheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            [self postToFacebook];
+            break;
+        case 1:
+            [self postToTwitter];
+            break;
+        case 2:
+            [self postToInstagram];
+            break;
+        case 3:
+            [self sendInEmail];
+            break;
+        case 4:
+            [self sendInTextMessage];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

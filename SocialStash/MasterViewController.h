@@ -10,13 +10,15 @@
 
 #import <CoreData/CoreData.h>
 
+#import <iAd/iAd.h>
+
 #import "StatusCreationViewController.h"
 
 #import "Post.h"
 
 #import "GAI.h"
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, StatusCreationDelegate>
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, StatusCreationDelegate, ADBannerViewDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

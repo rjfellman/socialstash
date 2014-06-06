@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C45F37B17E017140040A451 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45F37917E017140040A451 /* Main_iPad.storyboard */; };
+		28092A5B1931988600BE5652 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28092A5A1931988600BE5652 /* iAd.framework */; };
 		8C45F38517E023AE0040A451 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38417E023AE0040A451 /* SystemConfiguration.framework */; };
 		8C45F38717E023C30040A451 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38617E023C30040A451 /* libz.dylib */; };
 		8C45F38917E22F8F0040A451 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45F38817E22F8F0040A451 /* CFNetwork.framework */; };
@@ -55,7 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8C45F37A17E017140040A451 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		28092A5A1931988600BE5652 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		8C45F37C17E023970040A451 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		8C45F37D17E023970040A451 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		8C45F37E17E023970040A451 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -111,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28092A5B1931988600BE5652 /* iAd.framework in Frameworks */,
 				8C45F38917E22F8F0040A451 /* CFNetwork.framework in Frameworks */,
 				8C45F38717E023C30040A451 /* libz.dylib in Frameworks */,
 				8C45F38517E023AE0040A451 /* SystemConfiguration.framework in Frameworks */,
@@ -138,14 +139,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8C45F37817E015710040A451 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-				8C45F37917E017140040A451 /* Main_iPad.storyboard */,
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
 		8C7AD4DE17D7DE2D00362654 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +175,7 @@
 		8C7AD4E917D7DE2D00362654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28092A5A1931988600BE5652 /* iAd.framework */,
 				8C45F38817E22F8F0040A451 /* CFNetwork.framework */,
 				8C45F38617E023C30040A451 /* libz.dylib */,
 				8C45F38417E023AE0040A451 /* SystemConfiguration.framework */,
@@ -199,7 +193,6 @@
 		8C7AD4F217D7DE2D00362654 /* SocialStash */ = {
 			isa = PBXGroup;
 			children = (
-				8C45F37817E015710040A451 /* iPad */,
 				8C7AD53217D8307400362654 /* Post.h */,
 				8C7AD53317D8307400362654 /* Post.m */,
 				8C7AD52D17D812C400362654 /* placeholder.png */,
@@ -333,7 +326,6 @@
 				8C7AD4F717D7DE2D00362654 /* InfoPlist.strings in Resources */,
 				8CB9074917E92A1D00AD241E /* Icon.png in Resources */,
 				8CB9074D17E92F1B00AD241E /* icon_1024.png in Resources */,
-				8C45F37B17E017140040A451 /* Main_iPad.storyboard in Resources */,
 				8C7AD52E17D812C400362654 /* placeholder.png in Resources */,
 				8C7AD50017D7DE2D00362654 /* Main.storyboard in Resources */,
 				8CB9075117E92F7A00AD241E /* AppIcon60x60.png in Resources */,
@@ -387,14 +379,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8C45F37917E017140040A451 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C45F37A17E017140040A451 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		8C7AD4F517D7DE2D00362654 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -500,15 +484,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SocialStash/SocialStash-Prefix.pch";
 				INFOPLIST_FILE = "SocialStash/SocialStash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					/Users/rustyfellman/Development/vulpine/SocialStash,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A8301B12-BEF2-4081-B8E5-9ABD202CB1FF";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -523,15 +508,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SocialStash/SocialStash-Prefix.pch";
 				INFOPLIST_FILE = "SocialStash/SocialStash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					/Users/rustyfellman/Development/vulpine/SocialStash,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A8301B12-BEF2-4081-B8E5-9ABD202CB1FF";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

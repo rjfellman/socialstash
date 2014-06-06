@@ -8,6 +8,7 @@
 
 #import "GAI.h"
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
 @class StatusCreationViewController;
 
@@ -19,7 +20,7 @@
 
 @end
 
-@interface StatusCreationViewController : UIViewController<UIActionSheetDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface StatusCreationViewController : UIViewController<UIActionSheetDelegate, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ADBannerViewDelegate>{
     BOOL keyboardIsShowing;
 }
 @property (strong, nonatomic) IBOutlet UIButton *attachedImageButton;

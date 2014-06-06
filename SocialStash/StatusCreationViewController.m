@@ -34,6 +34,8 @@
     [self.bodyTextView setTextColor:[UIColor lightGrayColor]];
     [self.bodyTextView setText:@"Body"];
     
+    self.canDisplayBannerAds = YES;
+    
     self.tracker = [[GAI sharedInstance] defaultTracker];
 }
 
